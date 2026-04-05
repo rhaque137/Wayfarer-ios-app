@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1D1D1D100000001 /* WayfarerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D1D1D000000001 /* WayfarerApp.swift */; };
-		A1D1D1D300000001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D1D1D200000001 /* ContentView.swift */; };
-		A1D1D1D500000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1D1D1D400000001 /* Assets.xcassets */; };
-		A1D1D1D700000001 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1D1D1D600000001 /* Preview Assets.xcassets */; };
+		A1000001 /* WayfarerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002 /* WayfarerApp.swift */; };
+		A1000003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004 /* ContentView.swift */; };
+		A1000005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000006 /* Assets.xcassets */; };
+		A1000007 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000008 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A1D1D1D000000001 /* WayfarerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayfarerApp.swift; sourceTree = "<group>"; };
-		A1D1D1D200000001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		A1D1D1D400000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A1D1D1D600000001 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Content/Preview Assets.xcassets"; sourceTree = "<group>"; };
-		A1D1D1D800000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1D1D1D900000001 /* WayfarerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = WayfarerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000002 /* WayfarerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayfarerApp.swift; sourceTree = "<group>"; };
+		A1000004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1000006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1000008 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Content/Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A1000009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1000010 /* WayfarerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = WayfarerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A1D1D1DA00000001 /* Frameworks */ = {
+		A1000011 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,30 +33,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A1D1D1DB00000001 = {
+		A1000012 = {
 			isa = PBXGroup;
 			children = (
-				A1D1D1DC00000001 /* WayfarerApp */,
-				A1D1D1DD00000001 /* Products */,
+				A1000013 /* WayfarerApp */,
+				A1000014 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		A1D1D1DC00000001 /* WayfarerApp */ = {
+		A1000013 /* WayfarerApp */ = {
 			isa = PBXGroup;
 			children = (
-				A1D1D1D000000001 /* WayfarerApp.swift */,
-				A1D1D1D200000001 /* ContentView.swift */,
-				A1D1D1D400000001 /* Assets.xcassets */,
-				A1D1D1D600000001 /* Preview Assets.xcassets */,
-				A1D1D1D800000001 /* Info.plist */,
+				A1000002 /* WayfarerApp.swift */,
+				A1000004 /* ContentView.swift */,
+				A1000006 /* Assets.xcassets */,
+				A1000008 /* Preview Assets.xcassets */,
+				A1000009 /* Info.plist */,
 			);
 			path = WayfarerApp;
 			sourceTree = "<group>";
 		};
-		A1D1D1DD00000001 /* Products */ = {
+		A1000014 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A1D1D1D900000001 /* WayfarerApp.app */,
+				A1000010 /* WayfarerApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,13 +64,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A1D1D1DE00000001 /* WayfarerApp */ = {
+		A1000015 /* WayfarerApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A1D1D1DF00000001 /* Build configuration list for PBXNativeTarget "WayfarerApp" */;
+			buildConfigurationList = A1000016 /* Build configuration list for PBXNativeTarget "WayfarerApp" */;
 			buildPhases = (
-				A1D1D1E000000001 /* Sources */,
-				A1D1D1E100000001 /* Frameworks */,
-				A1D1D1E200000001 /* Resources */,
+				A1000017 /* Sources */,
+				A1000011 /* Frameworks */,
+				A1000018 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -78,27 +78,27 @@
 			);
 			name = WayfarerApp;
 			productName = WayfarerApp;
-			productReference = A1D1D1D900000001 /* WayfarerApp.app */;
+			productReference = A1000010 /* WayfarerApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A1D1D1E300000001 /* Project object */ = {
+		A1000019 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1600;
 				ORGANIZATIONNAME = Wayfarer;
 				TargetAttributes = {
-					A1D1D1DE00000001 = {
+					A1000015 = {
 						CreatedOnToolsVersion = 16.0;
 						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = A1D1D1E400000001 /* Build configuration list for PBXProject "WayfarerApp" */;
+			buildConfigurationList = A1000020 /* Build configuration list for PBXProject "WayfarerApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -106,42 +106,42 @@
 				en,
 				Base,
 			);
-			mainGroup = A1D1D1DB00000001;
-			productRefGroup = A1D1D1DD00000001 /* Products */;
+			mainGroup = A1000012;
+			productRefGroup = A1000014 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A1D1D1DE00000001 /* WayfarerApp */,
+				A1000015 /* WayfarerApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A1D1D1E200000001 /* Resources */ = {
+		A1000018 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1D1D1D500000001 /* Assets.xcassets in Resources */,
-				A1D1D1D700000001 /* Preview Assets.xcassets in Resources */,
+				A1000005 /* Assets.xcassets in Resources */,
+				A1000007 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A1D1D1E000000001 /* Sources */ = {
+		A1000017 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1D1D1D100000001 /* WayfarerApp.swift in Sources */,
-				A1D1D1D300000001 /* ContentView.swift in Sources */,
+				A1000001 /* WayfarerApp.swift in Sources */,
+				A1000003 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		A1D1D1E500000001 /* Debug */ = {
+		A1000021 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -159,7 +159,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wayfarer.app;
 				PRODUCT_NAME = WayfarerApp;
-				SUPPORTED_PLATFORMS = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE = NO;
 				SWIFT_VERSION = 5.0;
@@ -167,7 +167,7 @@
 			};
 			name = Debug;
 		};
-		A1D1D1E600000001 /* Release */ = {
+		A1000022 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -185,7 +185,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wayfarer.app;
 				PRODUCT_NAME = WayfarerApp;
-				SUPPORTED_PLATFORMS = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE = NO;
 				SWIFT_VERSION = 5.0;
@@ -193,7 +193,7 @@
 			};
 			name = Release;
 		};
-		A1D1D1E700000001 /* Debug */ = {
+		A1000023 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -204,7 +204,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wayfarer.app;
 				PRODUCT_NAME = WayfarerApp;
-				SUPPORTED_PLATFORMS = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE = NO;
 				SWIFT_VERSION = 5.0;
@@ -212,7 +212,7 @@
 			};
 			name = Debug;
 		};
-		A1D1D1E800000001 /* Release */ = {
+		A1000024 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -223,7 +223,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wayfarer.app;
 				PRODUCT_NAME = WayfarerApp;
-				SUPPORTED_PLATFORMS = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE = NO;
 				SWIFT_VERSION = 5.0;
@@ -234,25 +234,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A1D1D1DF00000001 /* Build configuration list for PBXNativeTarget "WayfarerApp" */ = {
+		A1000016 /* Build configuration list for PBXNativeTarget "WayfarerApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A1D1D1E500000001 /* Debug */,
-				A1D1D1E600000001 /* Release */,
+				A1000021 /* Debug */,
+				A1000022 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1D1D1E400000001 /* Build configuration list for PBXProject "WayfarerApp" */ = {
+		A1000020 /* Build configuration list for PBXProject "WayfarerApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A1D1D1E700000001 /* Debug */,
-				A1D1D1E800000001 /* Release */,
+				A1000023 /* Debug */,
+				A1000024 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A1D1D1E300000001 /* Project object */;
+	rootObject = A1000019 /* Project object */;
 }
