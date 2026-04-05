@@ -49,13 +49,40 @@ struct ChatMessage: Identifiable, Codable {
     let content: String
 }
 
-final class ChatViewModel: ObservableObject {
+struct ItineraryActivity: Identifiable, Codable {
+    let id: String
+    let name: String
+    let category: String
+    let description: String
+    let address: String?
+    let lat: Double?
+    let lng: Double?
+}
+
+struct ItineraryDay: Identifiable, Codable {
+    let id: String
+    let dayNumber: Int
+    let date: String
+    let theme: String?
+    let activities: [ItineraryActivity]
+}
+
+struct ItineraryPlan: Codable {
+    let name: String
+    let destination: String
+    let numDays: Int
+    let numPeople: Int?
+    let days: [ItineraryDay]
+}
+
+final class PlanViewModel: ObservableObject {
     @Published var messages: [ChatMessage] = [
         ChatMessage(role: "assistant", content: "Ask Wayfarer where you want to go.")
     ]
     @Published var input: String = ""
     @Published var isSending = false
     @Published var errorMessage: String?
+    @Published var plan: ItineraryPlan?
 
     func send(using config: AppConfig?) {
         let trimmed = input.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -70,8 +97,40 @@ final class ChatViewModel: ObservableObject {
 
         isSending = true
         errorMessage = nil
+        let systemPrompt = """
+        You are Wayfarer, an expert AI travel planner. Respond ONLY with valid JSON matching this schema:
+        {
+          "name": "Trip name",
+          "destination": "City, Country",
+          "numDays": 3,
+          "numPeople": 2,
+          "days": [
+            {
+              "id": "day-1",
+              "dayNumber": 1,
+              "date": "Mon, Jun 2",
+              "theme": "Culture & Food",
+              "activities": [
+                {
+                  "id": "act-1",
+                  "name": "Place name",
+                  "category": "Landmark",
+                  "description": "2-3 sentences",
+                  "address": "Optional address",
+                  "lat": 35.0,
+                  "lng": 139.0
+                }
+              ]
+            }
+          ]
+        }
+        Ensure every activity has approximate lat/lng coordinates so we can place map pins.
+        """
         let payload: [String: Any] = [
-            "messages": messages.map { ["role": $0.role, "content": $0.content] }
+            "messages": [
+                ["role": "system", "content": systemPrompt],
+                ["role": "user", "content": trimmed]
+            ]
         ]
         let body = try? JSONSerialization.data(withJSONObject: payload)
         var request = URLRequest(url: url)
@@ -90,14 +149,33 @@ final class ChatViewModel: ObservableObject {
                     self.errorMessage = "No response"
                     return
                 }
-                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let text = json["text"] as? String {
-                    self.messages.append(ChatMessage(role: "assistant", content: text))
-                } else {
+                guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                      let text = json["text"] as? String else {
                     self.errorMessage = "Invalid response"
+                    return
+                }
+
+                if let plan = Self.decodePlan(from: text) {
+                    self.plan = plan
+                    self.messages.append(ChatMessage(role: "assistant", content: "Your itinerary is ready. Check the map and itinerary tabs for details."))
+                } else {
+                    self.messages.append(ChatMessage(role: "assistant", content: text))
                 }
             }
         }.resume()
+    }
+
+    private static func decodePlan(from text: String) -> ItineraryPlan? {
+        guard let jsonText = extractJSON(from: text),
+              let data = jsonText.data(using: .utf8) else { return nil }
+        let decoder = JSONDecoder()
+        return try? decoder.decode(ItineraryPlan.self, from: data)
+    }
+
+    private static func extractJSON(from text: String) -> String? {
+        guard let start = text.firstIndex(of: "{"),
+              let end = text.lastIndex(of: "}") else { return nil }
+        return String(text[start...end])
     }
 }
 
@@ -377,7 +455,7 @@ struct FooterCTA: View {
 
 struct PlanView: View {
     @EnvironmentObject private var appState: AppState
-    @StateObject private var chatVM = ChatViewModel()
+    @StateObject private var planVM = PlanViewModel()
     @State private var selectedTab = 0
 
     var body: some View {
@@ -391,11 +469,11 @@ struct PlanView: View {
             .padding()
 
             if selectedTab == 0 {
-                ChatPanelView(viewModel: chatVM)
+                ChatPanelView(viewModel: planVM)
             } else if selectedTab == 1 {
-                MapPanelView(token: appState.config?.mapboxAccessToken)
+                MapPanelView(token: appState.config?.mapboxAccessToken, plan: planVM.plan)
             } else {
-                ItineraryPanelView()
+                ItineraryPanelView(plan: planVM.plan)
             }
         }
     }
@@ -403,7 +481,7 @@ struct PlanView: View {
 
 struct ChatPanelView: View {
     @EnvironmentObject private var appState: AppState
-    @ObservedObject var viewModel: ChatViewModel
+    @ObservedObject var viewModel: PlanViewModel
 
     var body: some View {
         VStack(spacing: 0) {
@@ -442,11 +520,12 @@ struct ChatPanelView: View {
 
 struct MapPanelView: View {
     let token: String?
+    let plan: ItineraryPlan?
 
     var body: some View {
         #if canImport(MapboxMaps)
         if let token, !token.isEmpty {
-            MapboxView(accessToken: token)
+            MapboxView(accessToken: token, plan: plan)
         } else {
             Text("Missing Mapbox token")
                 .foregroundColor(.secondary)
@@ -466,27 +545,58 @@ struct MapPanelView: View {
 #if canImport(MapboxMaps)
 struct MapboxView: UIViewRepresentable {
     let accessToken: String
+    let plan: ItineraryPlan?
 
     func makeUIView(context: Context) -> MapView {
         let options = ResourceOptions(accessToken: accessToken)
         let mapInitOptions = MapInitOptions(resourceOptions: options, styleURI: .streets)
-        return MapView(frame: .zero, mapInitOptions: mapInitOptions)
+        let mapView = MapView(frame: .zero, mapInitOptions: mapInitOptions)
+        mapView.ornaments.options.compass.visibility = .hidden
+        return mapView
     }
 
-    func updateUIView(_ uiView: MapView, context: Context) {}
+    func updateUIView(_ uiView: MapView, context: Context) {
+        guard let plan else { return }
+        let activities = plan.days.flatMap { $0.activities }.filter { $0.lat != nil && $0.lng != nil }
+        guard !activities.isEmpty else { return }
+
+        let camera = CameraOptions(center: CLLocationCoordinate2D(latitude: activities[0].lat!, longitude: activities[0].lng!), zoom: 11)
+        uiView.mapboxMap.setCamera(to: camera)
+
+        let manager = uiView.annotations.makePointAnnotationManager()
+        manager.annotations = activities.enumerated().map { idx, activity in
+            var point = PointAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.lat!, longitude: activity.lng!))
+            point.textField = "\(idx + 1)"
+            point.textColor = .white
+            point.textSize = 12
+            point.iconImage = "marker-15"
+            return point
+        }
+    }
 }
 #endif
 
 struct ItineraryPanelView: View {
+    let plan: ItineraryPlan?
+
     var body: some View {
         List {
-            Section("Day 1") {
-                Text("Senso-ji Temple")
-                Text("Asakusa Food Street")
-            }
-            Section("Day 2") {
-                Text("Arashiyama Bamboo Grove")
-                Text("Kinkaku-ji")
+            if let plan {
+                ForEach(plan.days) { day in
+                    Section("Day \(day.dayNumber) · \(day.date)") {
+                        ForEach(day.activities) { activity in
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(activity.name).font(.headline)
+                                Text(activity.description).font(.caption).foregroundColor(.secondary)
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
+                }
+            } else {
+                Section("No itinerary yet") {
+                    Text("Ask Wayfarer to plan your trip in the Chat tab.")
+                }
             }
         }
     }
